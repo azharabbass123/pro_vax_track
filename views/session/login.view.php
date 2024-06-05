@@ -43,8 +43,8 @@ require "views/partials/nav.php";
           </div>
           <button type="submit" class="btn btn-primary my-3">Submit</button>
           <p>
-            Did not have account,
-            <a href="#">register</a> here.
+            Did not have account, register
+            <a href="register">here</a>
           </p>
         </form>
       </div>

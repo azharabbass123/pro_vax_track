@@ -1,0 +1,9 @@
+RewriteEngine On
+#RewriteBase /pro_vax_tracker/
+
+# Ignore routing for existing files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route requests to the index.php file
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

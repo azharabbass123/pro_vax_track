@@ -16,7 +16,7 @@ require "views/partials/nav.php";
     >
       <div class="d-flex align-items-center justify-content-center">
         <form class="p-4 mx-2 w-50 bg-light rounded">
-          <h2 class="text-center text-dark">Register as patient</h2>
+          <h2 class="text-center text-dark">Enter your data</h2>
           <div class="mb-5">
             <label for="username" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="username" />

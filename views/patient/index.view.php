@@ -1,4 +1,5 @@
 <?php
+
 require 'views/partials/header.php';
 require 'views/partials/nav.php';
 ?>
@@ -18,13 +19,11 @@ require 'views/partials/nav.php';
           We are team of talented Docters and Health Workers
         </h2>
         <a
-          href="session"
+          href="#about"
           class="bg-primary text-white text-decoration-none p-2 rounded"
           >Get Started</a
         >
       </div>
     </section>
-
     <?php
-    require 'views/partials/footer.php';
-    ?>
+require 'views/partials/footer.php';
