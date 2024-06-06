@@ -15,23 +15,31 @@ require "views/partials/nav.php";
       "
     >
       <div class="d-flex align-items-center justify-content-center">
-        <form class="p-5 mx-5 w-50 bg-light rounded">
+        <form method="POST" class="p-5 mx-5 w-50 bg-light rounded">
           <h2 class="text-center text-primary">Login</h2>
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input
               type="email"
               class="form-control"
+              name="email"
               id="email"
+              value="<?= old('email') ?>"
               aria-describedby="emailHelp"
             />
+            <?php  if(isset($errors['email'])) : ?>
+                <p class="text-danger text-xs mt-2"><?= $errors['email'] ?></p>
+                <?php endif; ?>
             <div id="emailHelp" class="form-text">
               We'll never share your email with anyone else.
             </div>
           </div>
           <div class="mb-5">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" />
+            <input type="password" class="form-control" name="password" id="password" />
+            <?php  if(isset($errors['password'])) : ?>
+              <p class="text-danger  mt-2"><?= $errors['password'] ?></p>
+              <?php endif; ?>
           </div>
           <div class="mb-3">
             <select class="form-select" aria-label="Default select example">
@@ -42,6 +50,9 @@ require "views/partials/nav.php";
             </select>
           </div>
           <button type="submit" class="btn btn-primary my-3">Submit</button>
+          <?php  if(isset($errors['misMatch'])) : ?>
+              <p class="text-danger text-xs mt-2"><?= $errors['misMatch'] ?></p>
+              <?php endif; ?>
           <p>
             Did not have account, register
             <a href="register">here</a>

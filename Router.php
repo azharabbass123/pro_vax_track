@@ -4,6 +4,7 @@ spl_autoload_register(function ($class) {
     require "core/Middleware/" . $class .".php";
 });
 
+require 'model/Validator.php';
 class Router
 {
     protected $routes = [];

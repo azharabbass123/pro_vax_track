@@ -8,12 +8,6 @@ $database = 'vax_management_system';
 $dsn = "mysql:host=localhost;dbname=$database";
 $connection = new PDO($dsn, $username, $password);
 
-//$connection = new mysqli($host, $username, $password, $database);
-
-// if ($connection->errorInfo()) {
-//     die("Connection failed: " . $connection->errorInfo());
-// }
-
 // SQL queries to create tables
 $tables_sql = "
 CREATE TABLE IF NOT EXISTS roles (
@@ -99,8 +93,8 @@ CREATE TABLE IF NOT EXISTS vaccinations (
     FOREIGN KEY (patient_id) REFERENCES patients(id)
 );
 ";
-
-if ($connection->query($tables_sql)) {
+$connection->query($tables_sql);
+if ($connection->errorCode() == 00000) {
     echo "Tables created successfully\n";
 
 } else {
@@ -145,7 +139,8 @@ $province_ids = array(1, 2, 3, 4);
 foreach ($cities as $index => $city) {
     $province_id = $province_ids[floor($index / 10)]; 
     $insert_city_sql = "INSERT INTO cities (name, province_id) VALUES ('$city', '$province_id')";
-    if ($connection->query($insert_city_sql)) {
+    $connection->query($insert_city_sql);
+    if ($connection->errorCode() != 00000) {
         echo "Error initializing cities table: " . $connection->errorCode();
          // Exit script if city initialization fails
     }
@@ -164,7 +159,8 @@ VALUES ('$super_admin_username', '$super_admin_email', '$super_admin_password', 
 ";
 
 // Execute insert user query
-if ($connection->query($insert_user_sql)) {
+$connection->query($insert_user_sql);
+if ($connection->errorCode() != 00000) {
     echo "Super admin user created successfully\n";
 } else {
     echo "Error creating super admin user: " . $connection->errorCode();

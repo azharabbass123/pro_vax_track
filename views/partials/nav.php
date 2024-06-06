@@ -27,7 +27,16 @@
               <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] === '/pro_vax_track/patient') ? 'active': ''; ?>" href="patient">patient</a>
             </li>
           </ul>
-          <ul class="navbar-nav me-auto ml-5 mb-2 mb-lg-0">
+          
+          <?php if ($_SESSION['user'] ?? false) : ?>
+                <div class="ml-3 mt-2">
+                <form action="session" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="hover:bg-gray-700 hover:text-white rounded">Log Out</button>
+                  </form>
+            </div>
+              <?php else: ?>
+                <ul class="navbar-nav ml-5 mb-2 mb-lg-0">
           <li class="nav-item">
           <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] === '/pro_vax_track/session') ? 'active': ''; ?>" href="session">login</a>
           </li>
@@ -35,6 +44,9 @@
           <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] === '/pro_vax_track/register') ? 'active': ''; ?>" href="register">register</a>
           </li>
           </ul>
+                  <?php endif; ?>
+          
+          
         </div>
       </div>
     </nav>
