@@ -5,12 +5,14 @@ $username = 'root';
 $password = '';
 $database = 'vax_management_system';
 
+$dsn = "mysql:host=localhost;dbname=$database";
+$connection = new PDO($dsn, $username, $password);
 
-$connection = new mysqli($host, $username, $password, $database);
+//$connection = new mysqli($host, $username, $password, $database);
 
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
+// if ($connection->errorInfo()) {
+//     die("Connection failed: " . $connection->errorInfo());
+// }
 
 // SQL queries to create tables
 $tables_sql = "
@@ -98,24 +100,32 @@ CREATE TABLE IF NOT EXISTS vaccinations (
 );
 ";
 
-if ($connection->multi_query($tables_sql) === TRUE) {
+if ($connection->query($tables_sql)) {
     echo "Tables created successfully\n";
+
 } else {
-    echo "Error creating tables: " . $connection->error;
+    echo "Error creating tables: " . $connection->errorCode();
+     // Exit script if tables creation fails
 }
 
 // Initialize roles table
 $roles = array('admin', 'health_worker', 'patient');
 foreach ($roles as $role) {
     $insert_role_sql = "INSERT INTO roles (name) VALUES ('$role')";
-    $connection->query($insert_role_sql);
+    if (! $connection->query($insert_role_sql)) {
+        echo "Error initializing roles table: " . $connection->errorCode();
+         // Exit script if role initialization fails
+    }
 }
 
 // Initialize provinces table
 $provinces = array('Punjab', 'Sindh', 'KPK', 'Balochistan');
 foreach ($provinces as $province) {
     $insert_province_sql = "INSERT INTO provinces (name) VALUES ('$province')";
-    $connection->query($insert_province_sql);
+    if ($connection->query($insert_province_sql) !== TRUE) {
+        echo "Error initializing provinces table: " . $connection->errorCode();
+         // Exit script if province initialization fails
+    }
 }
 
 // Initialize cities table
@@ -135,13 +145,16 @@ $province_ids = array(1, 2, 3, 4);
 foreach ($cities as $index => $city) {
     $province_id = $province_ids[floor($index / 10)]; 
     $insert_city_sql = "INSERT INTO cities (name, province_id) VALUES ('$city', '$province_id')";
-    $connection->query($insert_city_sql);
+    if ($connection->query($insert_city_sql)) {
+        echo "Error initializing cities table: " . $connection->errorCode();
+         // Exit script if city initialization fails
+    }
 }
 
 // Create super admin user
 $super_admin_username = 'admin';
 $super_admin_email = 'admin@example.com';
-$super_admin_password = 'admin_password'; 
+$super_admin_password = 'admin123'; 
 $super_admin_role_id = 1; 
 $super_admin_city_id = 1; 
 
@@ -151,12 +164,9 @@ VALUES ('$super_admin_username', '$super_admin_email', '$super_admin_password', 
 ";
 
 // Execute insert user query
-if ($connection->query($insert_user_sql) === TRUE) {
+if ($connection->query($insert_user_sql)) {
     echo "Super admin user created successfully\n";
 } else {
-    echo "Error creating super admin user: " . $connection->error;
+    echo "Error creating super admin user: " . $connection->errorCode();
 }
-
-// Close connection
-$connection->close();
 

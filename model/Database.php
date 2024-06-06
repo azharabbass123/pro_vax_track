@@ -6,7 +6,7 @@ class Database
     public $connection;
 
     public function __construct(){
-        $dsn = 'mysql:host:localhost;dbname:vax_tracker_db';
+        $dsn = 'mysql:host:localhost;dbname:vax_management_system';
 
         $this->connection = new PDO($dsn,'root', '');
        
