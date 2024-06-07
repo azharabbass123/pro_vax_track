@@ -1,6 +1,7 @@
 <?php
 require "views/partials/header.php";
 require "views/partials/nav.php";
+require 'model/getRoles.php';
 ?>
 
 <section
@@ -42,12 +43,24 @@ require "views/partials/nav.php";
               <?php endif; ?>
           </div>
           <div class="mb-3">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Login as</option>
-              <option value="1">Patient</option>
-              <option value="2">Health Worker</option>
-              <option value="3">Admin</option>
+            <label for="role" class="form-label">Login as:</label>
+            <select
+              class="form-select"
+              id="role"
+              name="role"
+              aria-label="Default select example"
+            >
+              <option selected="" disabled="">select role</option>
+              <?php 
+              $roles = loadRole();
+              foreach ($roles as $role){
+                  echo "<option id='".$role['id']."' value='".$role['id']. "'>" .$role['name']."</option>"; 
+              }
+              ?>
             </select>
+            <?php  if(isset($errors['role'])) : ?>
+              <p class="text-danger"><?= $errors['role'] ?></p>
+              <?php endif; ?>
           </div>
           <button type="submit" class="btn btn-primary my-3">Submit</button>
           <?php  if(isset($errors['misMatch'])) : ?>
@@ -62,4 +75,4 @@ require "views/partials/nav.php";
     </section>
 
     <?php 
-    require "views/partials/footer.php";
+    require "views/partials/bottom.php";

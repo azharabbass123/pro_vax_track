@@ -14,16 +14,16 @@ require 'views/partials/nav.php';
       "
     >
       <div class="container">
-        <h1 class="text-primary">Welcome to Vax Tracker</h1>
-        <h2 class="text-info mb-4">
-          We are team of talented Docters and Health Workers
+        <h1>Welcome to PRO VAX</h1>
+        <h2 class=" mb-4">
+          Patient Dashboard
         </h2>
         <a
-          href="#about"
+          href="appointment"
           class="bg-primary text-white text-decoration-none p-2 rounded"
-          >Get Started</a
+          >Make new appointment</a
         >
       </div>
     </section>
     <?php
-require 'views/partials/footer.php';
+require 'views/partials/bottom.php';

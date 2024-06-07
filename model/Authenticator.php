@@ -5,17 +5,19 @@ spl_autoload_register(function ($class) {
 
 class Authenticator 
 {
-    public function attempt($email, $password){
+    public function attempt($email, $password, $role){
         $db = new Database();
-        $user = $db->query('select * from users where email = :email', [
-            'email' => $email
+        $user = $db->query('select * from users where email = :email and role_id = :role', [
+            'email' => $email,
+            'role' => $role
         ])->fetch();
 
         if($user){
-            if($password === $user['password']){
+            if(password_verify($password, $user['password'])){
                 $this->login([
                     'email' => $email,
-                    'id' =>$user['id']
+                    'id' =>$user['id'],
+                    'role_id' => $user['role_id']
                 ]);
 
                 return true;
@@ -24,7 +26,7 @@ class Authenticator
         return false;
     }
 
-    public function checkEmail($email, $password){
+    public function checkEmail($name, $email, $date, $role, $city,  $password){
         $db = new Database();
         $user = $db->query('select * from users where email = :email', [
             'email'=> $email
@@ -33,17 +35,48 @@ class Authenticator
         if($user){
             return true;
         }
-        $db->query('INSERT INTO users(email, password) VALUES (:email, :password)', [
+        $db->query('INSERT INTO users(name, email, password, DOB, role_id, city_id) VALUES (:name, :email, :password, :date, :role, :city)', [
+            'name' => $name,
             'email'=> $email,
-            'password'=> password_hash($password, PASSWORD_BCRYPT)
+            'password'=> password_hash($password, PASSWORD_BCRYPT),
+            'date' => $date,
+            'role' => $role,
+            'city' => $city
         ]);
+        $stmt = $db->query("SELECT LAST_INSERT_ID()");
+        $user_id = $stmt->fetchColumn();
+        if ($role == 3) {
+         //Insert into patients table
+        $db->query('INSERT INTO patients (userId) VALUES (:user_id)',[
+            'user_id' => $user_id
+        ]);
+        } elseif ($role == 2) {
+        // Insert into health_worker table
+         $db->query('INSERT INTO health_worker (userId) VALUES (:user_id)', [
+            'user_id' => $user_id
+         ]);
+        }
         return false;
+    }
+    public function createVaccination($date, $status, $patient){
+        $db = new Database();
+        $stmt = $db->query("SELECT * FROM patients WHERE userId = :patient", [
+        'patient' => $patient
+            ]);
+        $patient_id = $stmt->fetchColumn();
+        $db->query('INSERT INTO vaccinations(patient_id, vax_Date, vax_Status) VALUES (:patient, :date, :status)',[
+            'patient'=> $patient_id,
+            'date' => $date,
+            'status'=> $status
+        ]);
+        return true;
     }
     public function login($user)
     {
         $_SESSION['user'] = [
             'email' => $user['email'],
-            'curUserId' => $user['id']
+            'curUserId' => $user['id'],
+            'userRole'=> $user['role_id'],
         ];
 
         session_regenerate_id(true);

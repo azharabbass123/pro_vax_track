@@ -17,6 +17,9 @@ class LoginForm
         if(!Validator::string($attributes['password'])){
             $this->errors['password'] = 'Please provide a valid password.';
         }
+        if(!Validator::string($attributes['role'])){
+            $this->errors['role'] = 'Please select a valid role.';
+        }
     }
     
     public static function validate($attributes){
