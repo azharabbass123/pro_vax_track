@@ -14,7 +14,7 @@ require 'model/getHealthWorkers.php';
 
       <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 
-        <form method="post" role="form" class="php-email-form">
+        <form method="POST">
           <div class="row">
             <div class="col-md-4 form-group mt-3">
             <label for="name">Patient Name</label>
@@ -25,10 +25,13 @@ require 'model/getHealthWorkers.php';
             <div class="col-md-4 form-group mt-3">
             <label for="date">Appointment date</label>
               <input type="date" name="date" id="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required="">
+              <?php  if(isset($errors['date'])) : ?>
+                <p class="text-danger text-xs"><?= $errors['date'] ?></p>
+                <?php endif; ?>
             </div>
             <div class="col-md-4 form-group mt-3">
             <label for="hw">Health worker</label>
-              <select name="hw" id="hw" class="form-select" required="">
+              <select name="health_worker" id="hw" class="form-select" required="">
                 <option selected="" disabled="">Select Health Worker</option>
                 <?php 
               $healthWorkers = loadHealthWorker();
@@ -37,10 +40,13 @@ require 'model/getHealthWorkers.php';
               }
               ?>
               </select>
+              <?php  if(isset($errors['health_worker'])) : ?>
+                <p class="text-danger text-xs"><?= $errors['health_worker'] ?></p>
+                <?php endif; ?>
             </div>
             <div class="col-md-4 form-group my-3 ">
               <label for="status">Appointment status</label>
-             <input class="form-control" type="text" name="status" id="status" value="schedule" disabled>
+             <input class="form-control" type="text" name="status" id="status" value="schedule">
              </div>
           </div>
           </div>

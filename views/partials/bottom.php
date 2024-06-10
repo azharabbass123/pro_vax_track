@@ -15,6 +15,10 @@
     <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Jqury datatables links  -->
+  
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
   
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>

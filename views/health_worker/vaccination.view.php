@@ -1,7 +1,7 @@
 <?php 
 require 'views/partials/header.php';
 require 'views/partials/nav.php';
-require 'model/getPatient.php'
+require 'model/getPatient.php';
 ?>
 
 <section id="appointment" class="mt-5">

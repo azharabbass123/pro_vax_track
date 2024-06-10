@@ -71,6 +71,25 @@ class Authenticator
         ]);
         return true;
     }
+
+    public function createAppointment($user_id, $date, $health_worker, $status){
+        $db = new Database();
+        $stmt = $db->query("SELECT * FROM health_workers WHERE userId = :health_worker", [
+            'health_worker' => $health_worker
+        ]);
+        $health_workerId = $stmt->fetchColumn();
+        $stmt = $db->query("SELECT * FROM patients WHERE userId = :patient", [
+            'patient' => $user_id
+        ]);
+        $patient_id = $stmt->fetchColumn();
+        $db->query('INSERT INTO appointments(patient_id, hw_id, apt_Date, apt_Status) VALUES (:patient, :health_worker, :date, :status)',[
+            'patient' => $patient_id,
+            'health_worker' => $health_workerId,
+            'date' => $date,
+            'status' => $status
+        ]);
+        return true;
+    }
     public function login($user)
     {
         $_SESSION['user'] = [

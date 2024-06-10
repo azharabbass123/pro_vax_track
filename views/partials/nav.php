@@ -20,7 +20,7 @@
           </ul>
           
           <?php if ($_SESSION['user'] ?? false) : ?>
-                <div class="ml-3 mt-3">
+                <div class="ml-3 mt-2">
                 <form action="session" method="post">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="hover:bg-gray-700 hover:text-white rounded">Log Out</button>
