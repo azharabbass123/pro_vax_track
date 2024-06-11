@@ -117,29 +117,12 @@ require 'model/getRoles.php';
         }).done(function(cities){
           cities = JSON.parse(cities);
           $('#city').empty();
-          sortArrayOfObject(cities);
           cities.forEach(function(city){
             $('#city').append(`<option value = ${city.id}>` + city.name + "</option>");
           })
         })
       })
       })
-
-    // function to sort cities name
-    function sortArrayOfObject(arrayOfObjects){
-    arrayOfObjects.sort(function(a, b) {
-    var nameA = a.name.toUpperCase(); 
-    var nameB = b.name.toUpperCase(); 
-    if (nameA < nameB) {
-        return -1;
-    }
-    if (nameA > nameB) {
-        return 1;
-    }
-    // names must be equal
-    return 0;
-    });
-      }
     </script>
 
     <?php 

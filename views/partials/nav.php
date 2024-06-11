@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary py-2" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div class="container-fluid">
         <h3 class="navbar-brand text-white bold">PRO VAX</h3>
         <button

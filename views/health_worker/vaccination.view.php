@@ -18,7 +18,7 @@ require 'model/getPatient.php';
           <div class="row">
             <div class="col-md-4 form-group mt-3">
             <label for="name">Health Worker Name</label>
-             <input class="form-control" type="text" name="name" id="name" disabled>
+             <input class="form-control" type="text" name="name" id="name" value="<?php echo $_SESSION['user']['userName']?>" disabled>
              </div>
           </div>
           <div class="row">

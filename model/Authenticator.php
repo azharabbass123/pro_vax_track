@@ -17,7 +17,8 @@ class Authenticator
                 $this->login([
                     'email' => $email,
                     'id' =>$user['id'],
-                    'role_id' => $user['role_id']
+                    'role_id' => $user['role_id'],
+                    'name' => $user['name']
                 ]);
 
                 return true;
@@ -96,6 +97,7 @@ class Authenticator
             'email' => $user['email'],
             'curUserId' => $user['id'],
             'userRole'=> $user['role_id'],
+            'userName' => $user['name'],
         ];
 
         session_regenerate_id(true);

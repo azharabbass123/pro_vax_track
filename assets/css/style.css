@@ -546,7 +546,7 @@ h6 {
 
 /* Links on mouse-over */
 .mySidebar-btn:hover:not(.myActive-button) {
-  background-color: #555;
+  background-color: #aaa;
   color: white;
 }
 
