@@ -1,7 +1,5 @@
 <?php
 
-
-require 'core/Session.php';
 $sessionData = Session::get('_flash');
 function old($key, $default = '')
 {

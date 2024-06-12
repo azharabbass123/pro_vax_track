@@ -1,8 +1,7 @@
 <?php 
 require "views/partials/header.php";
 require "views/partials/nav.php";
-require 'model/getProvinces.php';
-require 'model/getRoles.php';
+
 ?>
 
 <section
@@ -51,7 +50,6 @@ require 'model/getRoles.php';
             >
               <option selected="" disabled="">select role</option>
               <?php 
-              $roles = loadRole();
               foreach ($roles as $role){
                 if($role['id'] != 1){
                   echo "<option id='".$role['id']."' value='".$role['id']. "'>" .$role['name']."</option>";
@@ -74,7 +72,7 @@ require 'model/getRoles.php';
             >
               <option selected="" disabled="">select province</option>
               <?php 
-              $prvinces = loadProvince();
+              
               foreach ($provinces as $province){
                 echo "<option id='".$province['id']."' value='".$province['id']. "'>" .$province['name']."</option>";
               }

@@ -3,11 +3,9 @@
 class HealthWorker 
 {
     public function handle(){
-        if($_SESSION["role"] == 'health_worker'){
-            header('location: health_worker');
-        }
-        else{
-            header('location: /');
+        if(($_SESSION["user"]['userRole'] != 2)){
+            Session::destroy();
+            header('location: /pro_vax_track/');
         }
     }
 }

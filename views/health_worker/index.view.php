@@ -15,6 +15,11 @@ require 'views/partials/nav.php';
       <button class="myActive-button mySidebar-btn " onclick="hwappointment_card()" id="hwappointment">Appointments</button>
       <button class="mySidebar-btn" onclick="hwvaccination_card()" id="hwvaccination">Vaccination</button>
       <a
+          href="vaccination"
+          class="mySidebar-btn text-center text-decoration-none p-2 rounded"
+          >Schedule new vax plan</a
+        >
+      <a
           href="editProfile?id=<?=$_SESSION['user']['curUserId']?>"
           class="bg-info w-50 mt-5 mx-2 text-center text-white text-decoration-none p-2 rounded"
           >Edit Profile</a>
@@ -85,13 +90,13 @@ require 'views/partials/nav.php';
               $sn = 1;
               foreach ($vaccinations as $vaccination){
                 ?>
-                <tr>
+                <tr id="<?=$vaccination['vaccination_id']?>">
                 <td> <?= $sn?></td>
                 <td><?= $vaccination['patient_name'] ?></td>
                 <td class="text-center"><?= $vaccination['vaccination_date'] ?></td>
                 <td><?= $vaccination['vaccination_status'] ?></td>
                 <td><a href='editVaccination?edit=<?=$vaccination['vaccination_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
-                <td><a href='crud-form.php?delete=<?=$vaccination['vaccination_id']?>' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="handleClick(<?=$vaccination['vaccination_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php
                $sn++; }
@@ -100,15 +105,16 @@ require 'views/partials/nav.php';
         </tbody>
       </table>
     </div>
-    <a
-          href="vaccination"
-          class="bg-primary w-25 text-white text-decoration-none p-2 rounded"
-          >Schedule new vax paln</a
-        >
           </div>
         </div>
       </div>
     </div>
+    <script>
+    function handleClick(id) {
+        alert(`Record deleted successfully! id: ${id}`);
+        document.getElementById(id).style.display = "none";
+    }
+    </script>
     </section>
     <?php
 require 'views/partials/bottom.php';
