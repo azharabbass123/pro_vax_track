@@ -46,7 +46,9 @@ require 'model/getPatient.php';
             </div>
             <div class="col-md-4 form-group my-3 ">
               <label for="status">Vaccination status</label>
-             <input class="form-control" type="text" name="status" id="status" value="schedule">
+              <select class="form-select" name="status" id="status">
+                <option  value="schedule" selected="">schedule</option>
+              </select>
              </div>
           </div>
           </div>

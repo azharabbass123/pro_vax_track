@@ -14,4 +14,6 @@ foreach($vaccinations as $vaccination){
     }
 }
 
+
+
 require 'views/health_worker/editVaccination.view.php';

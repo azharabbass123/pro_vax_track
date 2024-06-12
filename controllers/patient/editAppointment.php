@@ -2,6 +2,7 @@
 require 'model/getAppointments.php';
 require 'model/getHealthWorkers.php';
 
+
 $healthWorkers = loadHealthWorker();
 
 $id = $_GET['edit'];
@@ -14,5 +15,5 @@ foreach($appointments as $appointment){
         $appointmentStatus = $appointment['appointment_status'];
     }
 }
-
+ 
 require 'views/patient/editAppointment.view.php';

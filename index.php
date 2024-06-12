@@ -1,13 +1,15 @@
 <?php 
 
 spl_autoload_register(function ($class) {
-  require 'model/' .$class .".php";
+  require 'core/' .$class .".php";
 });
 
+require 'model/Database.php';
+require 'model/Authenticator.php';
 
 require 'core/Middleware/Middleware.php';
 require 'core/Middleware/Guest.php';
-require 'Router.php';
+require 'core/Router.php';
 $router = new Router();
 session_start();
 require 'routes.php';

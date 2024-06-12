@@ -2,7 +2,7 @@
 spl_autoload_register(function ($class) {
     require 'model/' . $class .".php";
 });
-
+require 'core/VaccinationForm.php';
 $form = VaccinationForm::validate($attributes = [
     'date' => $_POST['date'],
     'patient' => $_POST['patient'],

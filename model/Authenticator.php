@@ -3,6 +3,8 @@ spl_autoload_register(function ($class) {
     require   $class .".php";
 });
 
+require 'core/Session.php';
+
 class Authenticator 
 {
     public function attempt($email, $password, $role){
@@ -53,7 +55,7 @@ class Authenticator
         ]);
         } elseif ($role == 2) {
         // Insert into health_worker table
-         $db->query('INSERT INTO health_worker (userId) VALUES (:user_id)', [
+         $db->query('INSERT INTO health_workers (userId) VALUES (:user_id)', [
             'user_id' => $user_id
          ]);
         }
@@ -88,6 +90,50 @@ class Authenticator
             'health_worker' => $health_workerId,
             'date' => $date,
             'status' => $status
+        ]);
+        return true;
+    }
+
+    public function updateAppointment($appointmentId, $date, $status){
+        $db = new Database();
+        $stmt = $db->query("UPDATE appointments SET
+             apt_Date = :apt_date,
+             apt_Status = :apt_status
+             WHERE id = :id"
+             ,[
+                'id' => $appointmentId,
+                'apt_date' => $date,
+                'apt_status' => $status
+             ]);
+             return true;
+    }
+
+    public function updateVaccination($vaccinationId, $date, $status){
+        $db = new Database();
+        $stmt = $db->query("UPDATE vaccinations SET
+             vax_Date = :vax_date,
+             vax_Status = :vax_status
+             WHERE id = :id"
+             ,[
+                'id' => $vaccinationId,
+                'vax_date' => $date,
+                'vax_status' => $status
+             ]);
+             return true;
+    }
+
+    public function updateProfile($id, $name, $date, $city){
+        $db = new Database();
+        $stmt = $db->query('UPDATE users SET
+        name = :name,
+        DOB = :date,
+        city_id = :city
+        WHERE
+        id = :id',[
+            'id'=> $id,
+            'name'=> $name,
+            'date'=> $date,
+            'city'=> $city
         ]);
         return true;
     }

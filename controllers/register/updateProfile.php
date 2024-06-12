@@ -1,5 +1,14 @@
 <?php
 
+require 'model/getUser.php';
+require 'model/getProvinces.php';
+require 'model/getRoles.php';
+
+$id = $_GET['id'];
+
+$prvinces = loadProvince();
+$userData = loadUser($id);
+
 $sessionData = Session::get('_flash');
 function old($key, $default = '')
 {
@@ -12,8 +21,8 @@ function view($path, $attributes = [])
     require 'views/' . $path;
 }
 
-view('session/login.view.php', [
+view('register/updateProfile.view.php', [
     'errors' => $sessionData['errors'] ?? [],
+    'userData' => $userData,
+    'provinces' => $provinces
 ]);
-
-// require 'views/session/login.view.php';

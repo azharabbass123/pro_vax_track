@@ -5,17 +5,8 @@ require 'model/getRoles.php';
 ?>
 
 <section
-      id="hero"
-      class="py-5"
-      style="
-        height: 700px;
-        background-image: url(assets/img/heroimg.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        opacity: 0.8;
-      "
-    >
-      <div class="d-flex align-items-center justify-content-center">
+      id="hero">
+      <div class="d-flex mt-3 align-items-center justify-content-center">
         <form method="POST" class="p-5 mx-5 w-50 bg-light rounded">
           <h2 class="text-center text-primary">Login</h2>
           <div class="mb-3">

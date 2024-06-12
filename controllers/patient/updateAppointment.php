@@ -1,22 +1,23 @@
-<?php 
+<?php
+
 spl_autoload_register(function ($class) {
     require 'model/' . $class .".php";
 });
-
 require 'core/AppointmentForm.php';
-$patient_Id = Session::get('user')['curUserId'];
+
+$prevUrl = $_POST['prevUrl'];
+
 $form = AppointmentForm::validate($attributes = [
-    'patient_id' => $patient_Id,
+    'appointment_id' => $_POST['id'],
     'date' => $_POST['date'],
     'health_worker' => $_POST['health_worker'],
     'status' => $_POST['status']
 ]);
 //  print_r($attributes);
 //  exit();
-$user = (new Authenticator)->createAppointment(
-    $attributes['patient_id'],
+$user = (new Authenticator)->updateAppointment(
+    $attributes['appointment_id'],
     $attributes['date'],
-    $attributes['health_worker'],
     $attributes['status'],
 );
 
@@ -25,6 +26,6 @@ if(!$user){
         'msg', 'Failed to schedule appointment'
     )->throw();
 } else {
-    header('location: patient');
+    header("location: $prevUrl");
     exit();
 }

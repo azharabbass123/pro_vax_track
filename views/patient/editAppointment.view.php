@@ -8,16 +8,19 @@ require 'views/partials/nav.php';
       <!-- Section Title -->
       <div class="container section-title aos-init aos-animate" data-aos="fade-up">
         <h2>Appointment</h2>
-        <p>Create new appointment with avaiable health worker</p>
+        <p>Update appointment schedule</p>
       </div><!-- End Section Title -->
 
       <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 
         <form method="POST">
           <div class="row">
+          <input type="hidden" name="_method" value="PATCH">
+          <input type="hidden" name="id" value="<?php echo $id ?>">
+          <input type="hidden" name="prevUrl" id="prevUrl" value="<?=$_SERVER['HTTP_REFERER']?>">
             <div class="col-md-4 form-group mt-3">
             <label for="name">Patient Name</label>
-             <input class="form-control" type="text" name="name" id="name" value="<?=$patientName?>"<?php echo $_SESSION['user']['userName']?>" disabled>
+             <input class="form-control" type="text" name="name" id="name" value="<?=$patientName?>" disabled>
              </div>
           </div>
           <div class="row">
@@ -33,9 +36,9 @@ require 'views/partials/nav.php';
               <select name="health_worker" id="hw" class="form-select" required="">
                 <?php 
               foreach ($healthWorkers as $healthWorker){
-                echo "<option id='" . $healthWorker['id'] . "' value='" . $healthWorker['id'] . "'";
-                echo $healthWorker['name'] == $healthWorkerName ? " selected='selected'" : "";
-                echo ">" . $healthWorker['name'] . "</option>";
+                if ($healthWorker['name'] == $healthWorkerName) {
+                  echo "<option id='" . $healthWorker['id'] . "' value='" . $healthWorker['id'] . "' selected='selected'>" . $healthWorker['name'] . "</option>";
+              }
               }
               ?>
               </select>
@@ -45,7 +48,14 @@ require 'views/partials/nav.php';
             </div>
             <div class="col-md-4 form-group my-3 ">
               <label for="status">Appointment status</label>
-             <input class="form-control" type="text" name="status" id="status" value="<?=$appointmentStatus?>">
+              <select
+              class="form-select"
+              id="status"
+              name="status"
+            >
+              <option select=""><?php echo ($appointmentStatus != 'schedule') ? 'done' : 'schedule'; ?></option>
+              <option><?php echo ($appointmentStatus == 'schedule') ? 'done' : 'schedule'; ?></option>
+            </select>
              </div>
           </div>
           </div>

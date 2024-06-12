@@ -3,6 +3,8 @@ spl_autoload_register(function ($class) {
     require 'model/' . $class .".php";
 });
 
+require 'core/RegisterForm.php';
+
 $form = RegisterForm::validate($attributes = [
     'name' => $_POST['name'],
     'email' => $_POST['email'],

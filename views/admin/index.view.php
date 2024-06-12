@@ -34,7 +34,6 @@ require 'views/partials/nav.php';
           <th class="bg-primary text-white text-center">name</th>
           <th class="bg-primary text-white text-center">eamil</th>
           <th class="bg-primary text-white text-center">city</th>
-          <th class="bg-primary text-white text-center">Edit</th>
           <th class="bg-primary text-white text-center">Delete</th>
         </tr>
         </thead>
@@ -48,7 +47,6 @@ require 'views/partials/nav.php';
                 <td><?= $healthWorker['name'] ?></td>
                 <td><?= $healthWorker['email'] ?></td>
                 <td><?= $healthWorker['city_name'] ?></td>
-                <td><a href='crud-form.php?edit="<?=$healthWorker['id']?>"' class="btn btn-sm btn-primary">Edit</a></td>
                 <td><a href='crud-form.php?delete="<?=$healthWorker['id']?>"' class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; } 
@@ -71,7 +69,6 @@ require 'views/partials/nav.php';
           <th class="bg-primary text-white text-center">name</th>
           <th class="bg-primary text-white text-center">eamil</th>
           <th class="bg-primary text-white text-center">city</th>
-          <th class="bg-primary text-white text-center">Edit</th>
           <th class="bg-primary text-white text-center">Delete</th>
         </tr>
         </thead>
@@ -85,7 +82,6 @@ require 'views/partials/nav.php';
                 <td><?= $patient['name'] ?></td>
                 <td><?= $patient['email'] ?></td>
                 <td><?= $patient['city_name'] ?></td>
-                <td><a href='crud-form.php?edit="<?=$patient['id']?>"' class="btn btn-sm btn-primary">Edit</a></td>
                 <td><a href='crud-form.php?delete="<?=$patient['id']?>"' class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; } 

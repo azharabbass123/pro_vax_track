@@ -8,13 +8,16 @@ require 'views/partials/nav.php';
       <!-- Section Title -->
       <div class="container section-title aos-init aos-animate" data-aos="fade-up">
         <h2>Vaccination Schedule</h2>
-        <p>Create new vaccination schedule for available patient</p>
+        <p>Update vaccination schedule</p>
       </div><!-- End Section Title -->
 
-      <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <form method="POST">
           <div class="row">
+          <input type="hidden" name="_method" value="PATCH">
+          <input type="hidden" name="id" value="<?php echo $id ?>">
+          <input type="hidden" name="prevUrl" id="prevUrl" value="<?=$_SERVER['HTTP_REFERER']?>">
             <div class="col-md-4 form-group mt-3">
             <label for="name">Auther Name</label>
              <input class="form-control" type="text" name="name" id="name" value="<?php echo $_SESSION['user']['userName']?>" disabled>
@@ -35,9 +38,9 @@ require 'views/partials/nav.php';
                 <?php
 
               foreach ($patients as $patient){
-                echo "<option id='" . $patient['id'] . "' value='" . $patient['id'] . "'";
-                echo $patient['name'] == $patientName ? " selected='selected'" : "";
-                echo ">" . $patient['name'] . "</option>";
+                if ($patient['name'] == $patientName) {
+                  echo "<option id='" . $patient['id'] . "' value='" . $patient['id'] . "' selected='selected'>" . $patient['name'] . "</option>";
+              }
               }
               ?>
               </select>
@@ -47,10 +50,20 @@ require 'views/partials/nav.php';
             </div>
             <div class="col-md-4 form-group my-3 ">
               <label for="status">Vaccination status</label>
-             <input class="form-control" type="text" name="status" id="status" value="<?=$vaccinationStatus?>">
+              <select
+              class="form-select"
+              id="status"
+              name="status"
+            >
+            <option select=""><?php echo ($vaccinationStatus != 'schedule') ? 'done' : 'schedule'; ?></option>
+            <option><?php echo ($vaccinationStatus == 'schedule') ? 'done' : 'schedule'; ?></option>
+            </select>
              </div>
           </div>
           </div>
+          <?php  if(isset($errors['msg'])) : ?>
+              <p class="text-danger text-xs mt-2"><?= $errors['msg'] ?></p>
+              <?php endif; ?>
 
           <!-- <div class="form-group mt-3">
             <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>

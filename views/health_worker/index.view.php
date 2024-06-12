@@ -14,6 +14,10 @@ require 'views/partials/nav.php';
       
       <button class="myActive-button mySidebar-btn " onclick="hwappointment_card()" id="hwappointment">Appointments</button>
       <button class="mySidebar-btn" onclick="hwvaccination_card()" id="hwvaccination">Vaccination</button>
+      <a
+          href="editProfile?id=<?=$_SESSION['user']['curUserId']?>"
+          class="bg-info w-50 mt-5 mx-2 text-center text-white text-decoration-none p-2 rounded"
+          >Edit Profile</a>
     </div> 
  <!-- Page content -->
  <div class="container" id="myContainer">
@@ -49,8 +53,8 @@ require 'views/partials/nav.php';
                 <td><?= $appointment['health_worker_name'] ?></td>
                 <td><?= $appointment['appointment_date'] ?></td>
                 <td><?= $appointment['appointment_status'] ?></td>
-                <td><a href='crud-form.php?edit="<?=$appointment['appointment_id']?>"' class="btn btn-sm btn-primary">Edit</a></td>
-                <td><a href='crud-form.php?delete="<?=$appointment['appointment_id']?>"' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='editAppointment?edit=<?=$appointment['appointment_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
+                <td><a href='crud-form.php?delete=<?=$appointment['appointment_id']?>' class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; } }
               ?>
@@ -105,8 +109,6 @@ require 'views/partials/nav.php';
         </div>
       </div>
     </div>
-        
-  
     </section>
     <?php
 require 'views/partials/bottom.php';
