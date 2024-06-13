@@ -23,6 +23,9 @@
     <!-- Jquery files   -->
      <script src="assets/js/adminViewData.js"></script>
      <script src="assets/js/hwViewData.js"></script>
+     
+    <!-- Soft Delete fiels   -->
+     <script src="assets/js/softDelete.js"></script>
   
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>

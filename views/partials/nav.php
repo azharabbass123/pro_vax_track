@@ -15,7 +15,6 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-1 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link <?php echo ($_SERVER['REQUEST_URI'] === '/pro_vax_track/') ? 'active': 'd-none'; ?>" aria-current="page" href="/pro_vax_track/">Home</a>
             </li>
           </ul>
           

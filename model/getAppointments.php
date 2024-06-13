@@ -17,7 +17,9 @@ function loadAppoitments(){
         JOIN 
         health_workers ON appointments.hw_id = health_workers.id
         JOIN 
-        users AS health_worker_user ON health_workers.userId = health_worker_user.id;')->fetchAll(PDO::FETCH_ASSOC);
+        users AS health_worker_user ON health_workers.userId = health_worker_user.id
+        WHERE 
+        appointments.deleted_at IS NULL;')->fetchAll(PDO::FETCH_ASSOC);
         return $appointments;
         } catch (PDOException $e) {
         echo "Database Error: " . $e->getMessage();

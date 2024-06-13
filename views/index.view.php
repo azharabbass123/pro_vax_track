@@ -7,9 +7,9 @@ require 'views/partials/nav.php';
   
   <!-- <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in" class="aos-init aos-animate"> -->
 
-  <div class="container position-relative d-flex flex-column">
+  <div class="container mt-5 position-relative d-flex flex-column">
 
-    <div class="welcome position-relative mb-4 aos-init aos-animate" data-aos="fade-down" data-aos-delay="100">
+    <div class="welcome mt-5 position-relative mb-4 aos-init aos-animate" data-aos="fade-down" data-aos-delay="100">
       <h1 class="mb-3">WELCOME TO PRO VAX</h1>
       <h3>We are team of talented Health Workers</h3>
     </div><!-- End Welcome -->

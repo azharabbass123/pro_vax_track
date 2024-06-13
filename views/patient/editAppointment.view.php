@@ -36,9 +36,9 @@ require 'views/partials/nav.php';
               <select name="health_worker" id="hw" class="form-select" required="">
                 <?php 
               foreach ($healthWorkers as $healthWorker){
-                if ($healthWorker['name'] == $healthWorkerName) {
+                //if ($healthWorker['name'] == $healthWorkerName) {
                   echo "<option id='" . $healthWorker['id'] . "' value='" . $healthWorker['id'] . "' selected='selected'>" . $healthWorker['name'] . "</option>";
-              }
+              //}
               }
               ?>
               </select>

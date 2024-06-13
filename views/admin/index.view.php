@@ -42,12 +42,12 @@ require 'views/partials/nav.php';
               $sn = 1;
               foreach ($healthWorkers as $healthWorker){
                 ?>
-                <tr>
+                <tr id="<?=$healthWorker['id']?>">
                 <td> <?= $sn?></td>
                 <td><?= $healthWorker['name'] ?></td>
                 <td><?= $healthWorker['email'] ?></td>
                 <td><?= $healthWorker['city_name'] ?></td>
-                <td><a href='crud-form.php?delete="<?=$healthWorker['id']?>"' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="deleteHw(<?=$healthWorker['id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; } 
               ?>
@@ -77,12 +77,12 @@ require 'views/partials/nav.php';
               $sn = 1;
               foreach ($patients as $patient){
                 ?>
-                <tr>
+                <tr id="<?=$patient['id']?>">
                 <td> <?= $sn?></td>
                 <td><?= $patient['name'] ?></td>
                 <td><?= $patient['email'] ?></td>
                 <td><?= $patient['city_name'] ?></td>
-                <td><a href='crud-form.php?delete="<?=$patient['id']?>"' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="deletePatient(<?=$patient['id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; } 
               ?>
@@ -114,14 +114,14 @@ require 'views/partials/nav.php';
               $sn = 1;  
               foreach ($appointments as $appointment){
                 ?>
-                <tr>
+                <tr id="<?=$appointment['appointment_id']?>">
                 <td> <?= $sn?></td>
                 <td><?= $appointment['patient_name'] ?></td>
                 <td><?= $appointment['health_worker_name'] ?></td>
                 <td><?= $appointment['appointment_date'] ?></td>
                 <td><?= $appointment['appointment_status'] ?></td>
                 <td><a href='editAppointment?edit=<?=$appointment['appointment_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
-                <td><a href='crud-form.php?delete=<?=$appointment['appointment_id']?>' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="deleteAptRec(<?=$appointment['appointment_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; }
               ?>
@@ -152,13 +152,13 @@ require 'views/partials/nav.php';
               $sn = 1;
               foreach ($vaccinations as $vaccination){
                 ?>
-                <tr>
+                <tr id="<?=$vaccination['vaccination_id']?>">
                 <td> <?= $sn?></td>
                 <td><?= $vaccination['patient_name'] ?></td>
                 <td class="text-center"><?= $vaccination['vaccination_date'] ?></td>
                 <td><?= $vaccination['vaccination_status'] ?></td>
                 <td><a href='editVaccination?edit=<?=$vaccination['vaccination_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
-                <td><a href='crud-form.php?delete="<?=$vaccination['vaccination_id']?>"' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="deleteVaxRec(<?=$vaccination['vaccination_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php
                $sn++; }

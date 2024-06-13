@@ -4,7 +4,7 @@ require 'model/getHealthWorkers.php';
 
 
 $healthWorkers = loadHealthWorker();
-
+print_r($healthWorkers);
 $id = $_GET['edit'];
 $appointments = loadAppoitments();
 foreach($appointments as $appointment){

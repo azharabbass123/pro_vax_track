@@ -4,8 +4,16 @@ class HealthWorker
 {
     public function handle(){
         if(($_SESSION["user"]['userRole'] != 2)){
-            Session::destroy();
-            header('location: /pro_vax_track/');
+
+            if($_SESSION["user"]['userRole'] == 1){
+                header('location: admin');
+            } 
+            else if($_SESSION["user"]['userRole'] == 3){
+                header('location: patient');
+            }
+            else{
+                header('location: /pro_vax_track/');
+            }
         }
     }
 }

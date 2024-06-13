@@ -12,7 +12,9 @@ FROM
 JOIN 
     patients ON vaccinations.patient_id = patients.id
 JOIN 
-    users AS patient_user ON patients.userId = patient_user.id;')->fetchAll(PDO::FETCH_ASSOC);
+    users AS patient_user ON patients.userId = patient_user.id
+    WHERE 
+    vaccinations.deleted_at IS NULL;')->fetchAll(PDO::FETCH_ASSOC);
         return $vaccinations;
         } catch (PDOException $e) {
         echo "Database Error: " . $e->getMessage();

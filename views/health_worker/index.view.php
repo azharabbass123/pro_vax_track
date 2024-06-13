@@ -52,14 +52,14 @@ require 'views/partials/nav.php';
               foreach ($appointments as $appointment){
                 if($appointment['health_worker_name'] == $_SESSION['user']['userName']){
                 ?>
-                <tr>
+                <tr id="<?=$appointment['appointment_id']?>">
                 <td> <?= $sn?></td>
                 <td><?= $appointment['patient_name'] ?></td>
                 <td><?= $appointment['health_worker_name'] ?></td>
                 <td><?= $appointment['appointment_date'] ?></td>
                 <td><?= $appointment['appointment_status'] ?></td>
                 <td><a href='editAppointment?edit=<?=$appointment['appointment_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
-                <td><a href='crud-form.php?delete=<?=$appointment['appointment_id']?>' class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="deleteAptRec(<?=$appointment['appointment_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php $sn++; } }
               ?>
@@ -96,7 +96,7 @@ require 'views/partials/nav.php';
                 <td class="text-center"><?= $vaccination['vaccination_date'] ?></td>
                 <td><?= $vaccination['vaccination_status'] ?></td>
                 <td><a href='editVaccination?edit=<?=$vaccination['vaccination_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
-                <td><a href='#' onclick="handleClick(<?=$vaccination['vaccination_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
+                <td><a href='#' onclick="deleteVaxRec(<?=$vaccination['vaccination_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
               <?php
                $sn++; }
@@ -109,12 +109,6 @@ require 'views/partials/nav.php';
         </div>
       </div>
     </div>
-    <script>
-    function handleClick(id) {
-        alert(`Record deleted successfully! id: ${id}`);
-        document.getElementById(id).style.display = "none";
-    }
-    </script>
     </section>
     <?php
 require 'views/partials/bottom.php';
