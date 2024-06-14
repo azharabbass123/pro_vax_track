@@ -148,14 +148,16 @@ foreach ($cities as $index => $city) {
 
 // Create super admin user
 $super_admin_username = 'admin';
-$super_admin_email = 'admin@example.com';
+$super_admin_email = 'admin123@gmail.com';
 $super_admin_password = 'admin123'; 
 $super_admin_role_id = 1; 
 $super_admin_city_id = 1; 
 
+$super_admin_hashed_password = password_hash($super_admin_password, PASSWORD_BCRYPT);
+
 $insert_user_sql = "
 INSERT INTO users (name, email, password, role_id, city_id) 
-VALUES ('$super_admin_username', '$super_admin_email', '$super_admin_password', '$super_admin_role_id', '$super_admin_city_id');
+VALUES ('$super_admin_username', '$super_admin_email', '$super_admin_hashed_password', '$super_admin_role_id', '$super_admin_city_id');
 ";
 
 // Execute insert user query
