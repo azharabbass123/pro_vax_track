@@ -4,7 +4,7 @@ require 'views/partials/header.php';
 require 'views/partials/nav.php';
 ?>
 <section
-      id="hero">
+      id="hero" style="overflow-y: scroll">
       <!-- The sidebar -->
     <div class="mySidebar">
     <h3 class="text-info mb-4">

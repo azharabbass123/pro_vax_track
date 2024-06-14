@@ -5,7 +5,7 @@ require 'model/getRoles.php';
 ?>
 
 <section
-      id="hero">
+      id="hero" style="overflow-y: scroll;">
       <div class="d-flex mt-3 align-items-center justify-content-center">
         <form method="POST" class="p-5 mx-5 w-50 bg-light rounded">
           <h2 class="text-center text-primary">Login</h2>

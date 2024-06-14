@@ -257,7 +257,7 @@ h6 {
   color: #2c4964;
   white-space: nowrap;
   transition: 0.3s;
-  border-bottom: 2px solid #fff;
+  border: 1px solid #ffffff;
   padding: 5px 2px;
 }
 
@@ -272,7 +272,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #1977cc;
+  color: #219df0;
   border-color: #1977cc;
 }
 
@@ -457,12 +457,27 @@ h6 {
   display: block;
 }
 
+.my-nav-logo{
+  height: 35px;
+  width:auto;
+  margin-right:8px;
+  margin-bottom:3px;
+}
+
+.my-nav-img{
+  height: 35px;
+   width:auto; 
+   margin-right:15px;
+  border-radius: 50%;
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
   padding-top: 0;
   width: 100%;
+  overflow-x: hidden;
   height: 90vh;
   background: url("../img/hero-bg.jpg") top center;
   background-size: cover;

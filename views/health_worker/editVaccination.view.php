@@ -64,15 +64,6 @@ require 'views/partials/nav.php';
           <?php  if(isset($errors['msg'])) : ?>
               <p class="text-danger text-xs mt-2"><?= $errors['msg'] ?></p>
               <?php endif; ?>
-
-          <!-- <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
-          </div> -->
-          <!-- <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div> -->
           <div class="text-center m-5"><button class="btn bg-primary" type="submit">Update Schedule</button></div>
         </form>
 

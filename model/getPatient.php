@@ -1,5 +1,6 @@
 <?php 
- 
+
+
  function loadPatient(){
     try {
         $db = new Database();
@@ -24,3 +25,31 @@
         exit();
         }
  }
+
+function trackPatients($p_id){
+    try {
+        $db = new Database();
+        $hw_id = $_SESSION['user']['curUserId'];
+        $vaccinations = $db->query("SELECT 
+                        u.id AS user_id,
+                        u.name AS user_name,
+                        u.email AS user_email,
+                        c.name AS city_name,
+                        p.name AS province_name
+                    FROM 
+                        patients pat
+                    JOIN 
+                        users u ON pat.userId = u.id
+                    JOIN 
+                        cities c ON u.city_id = c.id
+                    JOIN 
+                        provinces p ON c.province_id = p.id
+                    WHERE 
+                        pat.id = :patient_id",
+                    ['patient_id' => $p_id])->fetchAll(PDO::FETCH_ASSOC);
+        return $vaccinations;
+        } catch (PDOException $e) {
+        echo "Database Error: " . $e->getMessage();
+        exit();
+        }
+}

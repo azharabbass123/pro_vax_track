@@ -4,7 +4,7 @@ require 'views/partials/header.php';
 require 'views/partials/nav.php';
 ?>
 <section
-      id="hero">
+      id="hero" style="overflow-y: scroll">
       <!-- The sidebar -->
     <div class="mySidebar">
     <h3 class="text-info text-center mb-4">
@@ -40,7 +40,7 @@ require 'views/partials/nav.php';
         <th class="bg-primary text-white text-center">Sr.</th>
           <th class="bg-primary text-white text-center">Patient Name</th>
           <th class="bg-primary text-white text-center">Health Worker</th>
-          <th class="bg-primary text-white text-center">Date</th>
+          <th class="bg-primary text-white text-center">Apt. Date</th>
           <th class="bg-primary text-white text-center">Status</th>
           <th class="bg-primary text-white text-center">Edit</th>
           <th class="bg-primary text-white text-center">Delete</th>
@@ -79,7 +79,7 @@ require 'views/partials/nav.php';
         <tr>
         <th class="bg-primary text-white text-center">Sr.</th>
           <th class="bg-primary text-white text-center">Patient Name</th>
-          <th class="bg-primary text-white text-center">Date</th>
+          <th class="bg-primary text-white text-center">Vax. Date</th>
           <th class="bg-primary text-white text-center">Status</th>
           <th class="bg-primary text-white text-center">Edit</th>
           <th class="bg-primary text-white text-center">Delete</th>
@@ -92,7 +92,7 @@ require 'views/partials/nav.php';
                 ?>
                 <tr id="<?=$vaccination['vaccination_id']?>">
                 <td> <?= $sn?></td>
-                <td><?= $vaccination['patient_name'] ?></td>
+                <td><a href="patientDetail?patient_id=<?= $vaccination['patient_id'] ?>"><?= $vaccination['patient_name'] ?></a></td>
                 <td class="text-center"><?= $vaccination['vaccination_date'] ?></td>
                 <td><?= $vaccination['vaccination_status'] ?></td>
                 <td><a href='editVaccination?edit=<?=$vaccination['vaccination_id']?>' class="btn btn-sm btn-primary">Edit</a></td>

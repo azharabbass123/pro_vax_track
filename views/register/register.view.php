@@ -5,19 +5,9 @@ require "views/partials/nav.php";
 ?>
 
 <section
-      id="hero"
-      class="py-4"
-      style="
-        min-height: 887px;
-        width:auto;
-        background-image: url(assets/img/heroimg.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        opacity: 0.7;
-      "
-    >
+      id="hero" style="overflow-y: scroll;">
       <div class="d-flex align-items-center justify-content-center">
-        <form method="POST" class="p-4 m-2 w-50 bg-light rounded">
+        <form method="POST" class="p-4 mt-4 w-50 bg-light rounded">
           <h2 class="text-center text-dark">Enter your data</h2>
           <div class="mb-3">
             <label for="username" class="form-label">Full Name</label>

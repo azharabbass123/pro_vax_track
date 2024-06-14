@@ -24,14 +24,14 @@ require 'model/getHealthWorkers.php';
           <div class="row">
             <div class="col-md-4 form-group mt-3">
             <label for="date">Appointment date</label>
-              <input type="date" name="date" id="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required="">
+              <input type="date" name="date" id="date" class="form-control datepicker" id="date" placeholder="Appointment Date">
               <?php  if(isset($errors['date'])) : ?>
                 <p class="text-danger text-xs"><?= $errors['date'] ?></p>
                 <?php endif; ?>
             </div>
             <div class="col-md-4 form-group mt-3">
             <label for="hw">Health worker</label>
-              <select name="health_worker" id="hw" class="form-select" required="">
+              <select name="health_worker" id="hw" class="form-select">
                 <option selected="" disabled="">Select Health Worker</option>
                 <?php 
               $healthWorkers = loadHealthWorker();

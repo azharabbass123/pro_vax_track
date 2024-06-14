@@ -7,6 +7,7 @@ require 'model/getVaccination.php';
 
 
 $appointments = loadAppoitments();
+
 $vaccinations = loadVaccinations();
 
 

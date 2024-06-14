@@ -27,6 +27,7 @@ $router->get('editAppointment','controllers/patient/editAppointment.php');
 $router->patch('editAppointment','controllers/patient/updateAppointment.php');
 $router->get('editProfile', 'controllers/register/updateProfile.php');
 $router->post('editProfile', 'controllers/register/storeUpdatedProfile.php');
+$router->get('patientDetail', 'controllers/patient/patientDetail.php')->only('health_worker');;
 
 // route to create initialize tables
 // $router->get('seeder', 'seeder.php')->only('guest');
