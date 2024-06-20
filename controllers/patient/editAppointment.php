@@ -1,7 +1,6 @@
 <?php
-require 'model/getAppointments.php';
-require 'model/getHealthWorkers.php';
 
+require 'model/getData.php';
 
 $healthWorkers = loadHealthWorker();
 $id = $_GET['edit'];

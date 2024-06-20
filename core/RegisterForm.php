@@ -11,24 +11,24 @@ class RegisterForm
     public function __construct(public array $attributes)
     {
         if(!Validator::string($attributes['name'])){
-            $this->errors['name'] = 'Please provide a valid name.';
+            $this->errors['name'] = 'Please provide enter your name.';
         }
         if(!Validator::email($attributes['email'])) 
         {
             $this->errors['email'] = 'Please provide a valid email.';
         }
         if(!Validator::string($attributes['password'], 7, 30)){
-            $this->errors['password'] = 'Please provide a valid password.';
+            $this->errors['password'] = 'Please provide a strong password.';
         }
         if(!Validator::string($attributes['date']))
         {
             $this->errors['date'] = 'Please provide a valid date';
         }
         if(!Validator::string($attributes['role'])){
-            $this->errors['role'] = 'Please select a valid role.';
+            $this->errors['role'] = 'Please select a role.';
         }
         if(!Validator::string($attributes['city'])){
-            $this->errors['city'] = 'Please select a valid city.';
+            $this->errors['city'] = 'Please select a city.';
         }
     }
     

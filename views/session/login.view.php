@@ -1,7 +1,6 @@
 <?php
 require "views/partials/header.php";
 require "views/partials/nav.php";
-require 'model/getRoles.php';
 ?>
 
 <section

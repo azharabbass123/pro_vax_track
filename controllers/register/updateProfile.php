@@ -1,8 +1,6 @@
 <?php
 
-require 'model/getUser.php';
-require 'model/getProvinces.php';
-require 'model/getRoles.php';
+require 'model/getData.php';
 
 $id = $_GET['id'];
 

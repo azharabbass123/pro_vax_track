@@ -26,6 +26,9 @@
      
     <!-- Soft Delete fiels   -->
      <script src="assets/js/softDelete.js"></script>
+
+    <!-- ShowCities  -->
+     <script src="assets/js/ShowCities.js"></script>
   
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>

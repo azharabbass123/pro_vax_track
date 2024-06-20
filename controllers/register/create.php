@@ -1,8 +1,6 @@
 <?php
 
-
-require 'model/getProvinces.php';
-require 'model/getRoles.php';
+require 'model/getData.php';
 
 $prvinces = loadProvince();
 $roles = loadRole();

@@ -2,9 +2,9 @@
 $(document).ready(function(){
     deleteVaxRec = function(id) {
          $.ajax({
-           url: 'model/removeVaxRec.php',
-           method: 'post',
-           data: { id: id }, 
+           url: 'model/deleteData.php',
+           method: 'POST',
+           data: {action: 'deleteVaxRec', id: id }, 
            success: function(response){
              if(response == 1){
                alert(`Record deleted successfully!`);
@@ -23,9 +23,9 @@ $(document).ready(function(){
 
     deleteAptRec = function(id) {
          $.ajax({
-           url: 'model/removeAptRec.php',
-           type: 'POST',
-           data: {id: id},
+           url: 'model/deleteData.php',
+           method: 'POST',
+           data: {action: 'deleteAptRec', id: id},
            success:function(response){
              if(response == 1){
                alert(`Record deleted successfully!`);
@@ -39,9 +39,9 @@ $(document).ready(function(){
 
      deleteHw = function(id) {
         $.ajax({
-          url: 'model/removeHw.php',
-          type: 'POST',
-          data: {id: id},
+          url: 'model/deleteData.php',
+          method: 'POST',
+          data: {action: 'deleteHw', id: id},
           success:function(response){
             if(response == 1){
               alert(`Record deleted successfully!`);
@@ -55,9 +55,9 @@ $(document).ready(function(){
 
     deletePatient = function(id) {
         $.ajax({
-          url: 'model/removePatient.php',
-          type: 'POST',
-          data: {id: id},
+          url: 'model/deleteData.php',
+          method: 'POST',
+          data: {action: 'deletePatient', id: id},
           success:function(response){
             if(response == 1){
               alert(`Record deleted successfully!`);
@@ -66,6 +66,6 @@ $(document).ready(function(){
               alert(`This field cannot be deleted. ${id}`);
             }
           }
-        })
+      })
     }
    })

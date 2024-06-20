@@ -1,7 +1,7 @@
 <?php 
 
-require 'model/getVaccination.php';
-require 'model/getAppointments.php';
+require 'model/getData.php';
+
 
 $appointments = loadAppoitments();
 $vaccinations = loadVaccinations();

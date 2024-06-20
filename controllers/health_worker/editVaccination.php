@@ -1,6 +1,5 @@
 <?php
-require 'model/getVaccination.php';
-require 'model/getPatient.php';
+require 'model/getData.php';
 
 $patients = loadPatient();
 

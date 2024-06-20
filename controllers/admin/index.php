@@ -1,11 +1,6 @@
 <?php
 
-
-require 'model/getHealthWorkers.php';
-require 'model/getPatient.php';
-require 'model/getAppointments.php';
-require 'model/getVaccination.php';
-
+require 'model/getData.php';
 
 $healthWorkers = loadHealthWorkerWithCity();
 $patients = loadPatientWithCity();

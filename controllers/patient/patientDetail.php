@@ -1,6 +1,6 @@
 <?php
 
-require 'model/getPatient.php';
+require 'model/getData.php';
 
 $p_id = $_GET['patient_id'];
 $trackedPatients = trackPatients($p_id);

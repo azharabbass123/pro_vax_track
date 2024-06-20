@@ -11,7 +11,7 @@ class UpdateProfileForm
     public function __construct(public array $attributes)
     {
         if(!Validator::string($attributes['name'])){
-            $this->errors['name'] = 'Please provide a valid name.';
+            $this->errors['name'] = 'Please provide a enter your name.';
         }
         if(!Validator::string($attributes['date']))
         {
