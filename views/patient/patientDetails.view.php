@@ -23,6 +23,7 @@ require 'views/partials/nav.php';
       <table id="table" class="table table-bordered table-striped text-center">
         <thead>
         <tr>
+          <th class="bg-primary text-white text-center">Sr.</th>
           <th class="bg-primary text-white text-center">Name</th>
           <th class="bg-primary text-white text-center">Email</th>
           <th class="bg-primary text-white text-center">City</th>
@@ -32,16 +33,17 @@ require 'views/partials/nav.php';
         <tbody id="appointment_data">
         <?php 
               $sn = 1;
-              foreach ($trackedPatients as $trackedPatient){
+              foreach ($trackPatientsByProvince as $trackPatientByProvince){
                 ?>
             <tr>
-            <td><?= $trackedPatient['user_name'] ?></td>
-            <td><?= $trackedPatient['user_email'] ?></td>
-            <td><?= $trackedPatient['city_name'] ?></td>
-            <td><?= $trackedPatient['province_name'] ?></td>
+            <td> <?= $sn?></td>
+            <td><?= $trackPatientByProvince['patient_name'] ?></td>
+            <td><?= $trackPatientByProvince['patient_email'] ?></td>
+            <td><?= $trackPatientByProvince['city_name'] ?></td>
+            <td><?= $trackPatientByProvince['province_name'] ?></td>
             </tr>
               <?php 
-              }
+              $sn++ ;}
               ?>
               
         </tbody>

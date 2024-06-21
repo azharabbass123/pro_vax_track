@@ -56,34 +56,6 @@ try {
         }
  }
 
-function trackPatients($p_id){
-    $db = new Database();
-    try {
-        $hw_id = $_SESSION['user']['curUserId'];
-        $vaccinations = $db->query("SELECT 
-                        u.id AS user_id,
-                        u.name AS user_name,
-                        u.email AS user_email,
-                        c.name AS city_name,
-                        p.name AS province_name
-                    FROM 
-                        patients pat
-                    JOIN 
-                        users u ON pat.userId = u.id
-                    JOIN 
-                        cities c ON u.city_id = c.id
-                    JOIN 
-                        provinces p ON c.province_id = p.id
-                    WHERE 
-                        pat.id = :patient_id",
-                    ['patient_id' => $p_id])->fetchAll(PDO::FETCH_ASSOC);
-        return $vaccinations;
-        } catch (PDOException $e) {
-        echo "Database Error: " . $e->getMessage();
-        exit();
-        }
-}
-
 function loadAppoitments(){
     $db = new Database();
     try {
@@ -172,3 +144,58 @@ JOIN
         exit();
         }
  }
+
+ function getPatientsByProvince() {
+    $db = new Database();
+    try {
+        $patient = $db->query("SELECT 
+        prov.id AS province_id,
+        prov.name AS province_name,
+        COUNT(p.id) AS number_of_patients
+    FROM 
+        provinces prov
+    LEFT JOIN 
+        cities c ON prov.id = c.province_id
+    LEFT JOIN 
+        users u ON c.id = u.city_id
+    LEFT JOIN 
+        patients p ON u.id = p.userId
+    GROUP BY 
+        prov.id, prov.name;"
+)->fetchAll(PDO::FETCH_ASSOC);
+        return $patient;
+    } catch (PDOException $e) {
+        echo "Database Error: " . $e->getMessage();
+        exit();
+    }
+}
+
+function trackPatientsByProvince($province_id) {
+    $db = new Database();
+    try {
+        $patients = $db->query("
+            SELECT 
+                pu.id AS patient_id,
+                pu.name AS patient_name,
+                pu.email AS patient_email,
+                c.name AS city_name,
+                prov.name AS province_name
+            FROM 
+                patients p
+            JOIN 
+                users pu ON p.userId = pu.id
+            JOIN 
+                cities c ON pu.city_id = c.id
+            JOIN 
+                provinces prov ON c.province_id = prov.id
+            WHERE 
+                prov.id = :province_id
+            AND 
+                pu.deleted_at IS NULL;
+        ",['province_id' => $province_id])->fetchAll(PDO::FETCH_ASSOC);
+        return $patients;
+    } catch (PDOException $e) {
+        echo "Database Error: " . $e->getMessage();
+        exit();
+    }
+}

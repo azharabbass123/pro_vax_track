@@ -14,6 +14,7 @@ require 'views/partials/nav.php';
       
       <button class="myActive-button mySidebar-btn " onclick="hwappointment_card()" id="hwappointment">Appointments</button>
       <button class="mySidebar-btn" onclick="hwvaccination_card()" id="hwvaccination">Vaccination</button>
+      <button class="mySidebar-btn" onclick="trackPatients_card()" id="trackPatients">Track Patients</button>
       <a
           href="vaccination"
           class="mySidebar-btn text-center text-decoration-none p-2 rounded"
@@ -27,7 +28,7 @@ require 'views/partials/nav.php';
  <!-- Page content -->
  <div class="container" id="myContainer">
       <div class="row mt-2">
-        <div class="col">
+        <t class="col">
           <!-- appointments table  -->
           <div id="hwappointment_card" class="card mt-2">
             <div class="card-header">
@@ -92,12 +93,44 @@ require 'views/partials/nav.php';
                 ?>
                 <tr id="<?=$vaccination['vaccination_id']?>">
                 <td> <?= $sn?></td>
-                <td><a href="patientDetail?patient_id=<?= $vaccination['patient_id'] ?>"><?= $vaccination['patient_name'] ?></a></td>
+                <td class="text-center"><?= $vaccination['patient_name'] ?></td>
                 <td class="text-center"><?= $vaccination['vaccination_date'] ?></td>
                 <td><?= $vaccination['vaccination_status'] ?></td>
                 <td><a href='editVaccination?edit=<?=$vaccination['vaccination_id']?>' class="btn btn-sm btn-primary">Edit</a></td>
                 <td><a href='#' onclick="deleteVaxRec(<?=$vaccination['vaccination_id']?>)" class="btn btn-sm btn-danger">Delete</a></td>
               </tr>
+              <?php
+               $sn++; }
+              ?>
+              
+        </tbody>
+      </table>
+    </div>
+          </div>
+
+          <!-- track patients table  -->
+          <div id="trackPatients_card" class="card mt-2">
+            <div class="card-header">
+      <h3 class="display-6 fw-bold text-center text-primary">Track Patients by Province</h3>
+    </div>
+    <div class="card-body">
+      <table id="table" class="table table-bordered table-striped text-center">
+        <thead>
+        <tr>
+          <th class="bg-primary text-white text-center">Sr.</th>
+          <th class="bg-primary text-white text-center">Privnce</th>
+          <th class="bg-primary text-white text-center">Number of Patients</th>
+        </tr>
+        </thead>
+        <tbody id="trackPatients_data">
+        <?php 
+              $sn = 1;
+              foreach ($getPatientsByProvince as $getPatientByProvince){
+                ?>
+                <tr>
+                <td class="text-center"> <?= $sn?></td>
+                <td class="text-center"><?= $getPatientByProvince['province_name'] ?></td>
+                <td class="text-center"><a href="patientDetail?province_id=<?= $getPatientByProvince['province_id'] ?>"><?= $getPatientByProvince['number_of_patients'] ?></a></td>
               <?php
                $sn++; }
               ?>

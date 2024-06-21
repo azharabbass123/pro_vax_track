@@ -6,6 +6,8 @@ $appointments = loadAppoitments();
 
 $vaccinations = loadVaccinations();
 
+$getPatientsByProvince = getPatientsByProvince();
+
 
 
 require 'views/health_worker/index.view.php';
