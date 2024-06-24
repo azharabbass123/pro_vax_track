@@ -24,6 +24,10 @@ class RegisterForm
         {
             $this->errors['date'] = 'Please provide a valid date';
         }
+        if(!Validator::date($attributes['date']))
+        {
+            $this->errors['date'] = 'You are under age';
+        }
         if(!Validator::string($attributes['role'])){
             $this->errors['role'] = 'Please select a role.';
         }

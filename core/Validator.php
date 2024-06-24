@@ -12,12 +12,10 @@ class Validator{
     }
 
     public static function date($date){
-        function validateDate($date, $format = 'M-d-y') { 
-            $d = DateTime::createFromFormat($format, $date); 
-            return $d && $d->format($format) === $date; 
-        } 
-          
-        // Driver code 
-        return validateDate($date, 'M-d-y');
+        $dob = new DateTime($date);
+        $now = new DateTime();
+        $age = $dob->diff($now)->y;
+
+        return $age>= 18;
     }
 }

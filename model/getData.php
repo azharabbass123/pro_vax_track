@@ -94,32 +94,47 @@ function loadAppoitments(){
         exit();
     }
  }
- function loadHealthWorkerWithCity(){
+
+ function loadAvailableHealthWorker($appointmentDate) {
     $db = new Database();
     try {
-        $healthWorkers = $db->query('SELECT u.*, c.name AS city_name
-        FROM users u
-        JOIN cities c ON u.city_id = c.id
-        WHERE u.role_id = 2 and u.deleted_at is null;')->fetchAll(PDO::FETCH_ASSOC);
+        $query = 'SELECT u.*
+                  FROM users u
+                  WHERE u.role_id = 2
+                    AND u.deleted_at IS NULL
+                    AND NOT EXISTS (
+                        SELECT 1
+                        FROM appointments a
+                        WHERE a.hw_id = u.id
+                          AND DATE(a.apt_Date) = :appointmentDate
+                    )';
+
+        $healthWorkers = $db->query($query, ['appointmentDate' => $appointmentDate])->fetchAll(PDO::FETCH_ASSOC);
         return $healthWorkers;
-        } catch (PDOException $e) {
+    } catch (PDOException $e) {
         echo "Database Error: " . $e->getMessage();
         exit();
-        }
- }
+    }
+}
+ 
 
  function loadUser($user_id){
     $db = new Database();
     try {
-        $user = $db->query('SELECT * FROM users WHERE id = :id',[
-            'id' => $user_id
-        ])->fetch(PDO::FETCH_ASSOC);
+        $user = $db->query('
+            SELECT u.*, c.province_id, p.name as province_name
+            FROM users u
+            LEFT JOIN cities c ON u.city_id = c.id
+            LEFT JOIN provinces p ON c.province_id = p.id
+            WHERE u.id = :id', [
+                'id' => $user_id
+            ])->fetch(PDO::FETCH_ASSOC);
         return $user;
     } catch (PDOException $e) {
         echo "Database Error: " . $e->getMessage();
         exit();
     }
- }
+}
 
  function loadVaccinations(){
     $db = new Database();
@@ -145,25 +160,28 @@ JOIN
         }
  }
 
- function getPatientsByProvince() {
+ function getProvince($userId) {
     $db = new Database();
     try {
-        $patient = $db->query("SELECT 
-        prov.id AS province_id,
-        prov.name AS province_name,
-        COUNT(p.id) AS number_of_patients
-    FROM 
-        provinces prov
-    LEFT JOIN 
-        cities c ON prov.id = c.province_id
-    LEFT JOIN 
-        users u ON c.id = u.city_id
-    LEFT JOIN 
-        patients p ON u.id = p.userId
-    GROUP BY 
-        prov.id, prov.name;"
-)->fetchAll(PDO::FETCH_ASSOC);
-        return $patient;
+        $result = $db->query("
+            SELECT 
+                c.province_id AS province_id
+            FROM 
+                users u
+            LEFT JOIN 
+                cities c ON u.city_id = c.id
+            WHERE 
+                u.id = :userId
+            LIMIT 1",[
+                ':userId' => $userId
+            ])->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['province_id'];
+        } else {
+            return null; // Or handle the case where user doesn't exist
+        }
+        
     } catch (PDOException $e) {
         echo "Database Error: " . $e->getMessage();
         exit();
@@ -179,7 +197,9 @@ function trackPatientsByProvince($province_id) {
                 pu.name AS patient_name,
                 pu.email AS patient_email,
                 c.name AS city_name,
-                prov.name AS province_name
+                prov.name AS province_name,
+                v.vax_Date AS vaccination_date,
+                v.vax_Status AS vaccination_status
             FROM 
                 patients p
             JOIN 
@@ -188,11 +208,18 @@ function trackPatientsByProvince($province_id) {
                 cities c ON pu.city_id = c.id
             JOIN 
                 provinces prov ON c.province_id = prov.id
+            LEFT JOIN 
+                vaccinations v ON p.id = v.patient_id
             WHERE 
                 prov.id = :province_id
             AND 
-                pu.deleted_at IS NULL;
-        ",['province_id' => $province_id])->fetchAll(PDO::FETCH_ASSOC);
+                pu.deleted_at IS NULL
+            AND 
+                v.vax_Status = 'schedule'
+            AND 
+                v.vax_Date IS NOT NULL;
+        ", ['province_id' => $province_id])->fetchAll(PDO::FETCH_ASSOC);
+        
         return $patients;
     } catch (PDOException $e) {
         echo "Database Error: " . $e->getMessage();

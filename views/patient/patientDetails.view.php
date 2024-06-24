@@ -28,6 +28,8 @@ require 'views/partials/nav.php';
           <th class="bg-primary text-white text-center">Email</th>
           <th class="bg-primary text-white text-center">City</th>
           <th class="bg-primary text-white text-center">Province</th>
+          <th class="bg-primary text-white text-center">Vax date</th>
+          <th class="bg-primary text-white text-center">Vax status</th>
         </tr>
         </thead>
         <tbody id="appointment_data">
@@ -41,6 +43,8 @@ require 'views/partials/nav.php';
             <td><?= $trackPatientByProvince['patient_email'] ?></td>
             <td><?= $trackPatientByProvince['city_name'] ?></td>
             <td><?= $trackPatientByProvince['province_name'] ?></td>
+            <td><?= $trackPatientByProvince['vaccination_date'] ?></td>
+            <td><?= $trackPatientByProvince['vaccination_status'] ?></td>
             </tr>
               <?php 
               $sn++ ;}

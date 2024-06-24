@@ -17,6 +17,10 @@ class UpdateProfileForm
         {
             $this->errors['date'] = 'Please provide a valid date';
         }
+        if(!Validator::date($attributes['date']))
+        {
+            $this->errors['date'] = 'Please provide a valid date';
+        }
         if(!Validator::string($attributes['city'])){
             $this->errors['city'] = 'Please select a valid city.';
         }

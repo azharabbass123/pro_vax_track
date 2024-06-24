@@ -106,9 +106,11 @@ if ($connection->errorCode() == 00000) {
 $roles = array('admin', 'health_worker', 'patient');
 foreach ($roles as $role) {
     $insert_role_sql = "INSERT INTO roles (name) VALUES ('$role')";
-    if (! $connection->query($insert_role_sql)) {
-        echo "Error initializing roles table: " . $connection->errorCode();
-         // Exit script if role initialization fails
+    if (isTableEmpty($connection, 'roles')) { // Check if table is empty
+        if (! $connection->query($insert_role_sql)) {
+            echo "Error initializing roles table: " . $connection->errorCode();
+            exit; // Exit script if role initialization fails
+        }
     }
 }
 
@@ -116,9 +118,11 @@ foreach ($roles as $role) {
 $provinces = array('Punjab', 'Sindh', 'KPK', 'Balochistan');
 foreach ($provinces as $province) {
     $insert_province_sql = "INSERT INTO provinces (name) VALUES ('$province')";
-    if ($connection->query($insert_province_sql) !== TRUE) {
-        echo "Error initializing provinces table: " . $connection->errorCode();
-         // Exit script if province initialization fails
+    if (isTableEmpty($connection, 'provinces')) { // Check if table is empty
+        if (! $connection->query($insert_province_sql)) {
+            echo "Error initializing provinces table: " . $connection->errorCode();
+            exit; // Exit script if province initialization fails
+        }
     }
 }
 
@@ -134,24 +138,39 @@ $cities = array(
     'Quetta', 'Gwadar', 'Khuzdar', 'Chaman', 'Turbat', 'Sibi', 'Zhob', 'Hub', 'Loralai', 'Kharan'
 );
 
-$province_ids = array(1, 2, 3, 4); 
+$province_ids = array(1, 2, 3, 4);
 
 foreach ($cities as $index => $city) {
-    $province_id = $province_ids[floor($index / 10)]; 
+    $province_id = $province_ids[floor($index / 10)];
     $insert_city_sql = "INSERT INTO cities (name, province_id) VALUES ('$city', '$province_id')";
-    $connection->query($insert_city_sql);
-    if ($connection->errorCode() != 00000) {
-        echo "Error initializing cities table: " . $connection->errorCode();
-         // Exit script if city initialization fails
+    if (isTableEmpty($connection, 'cities')) { // Check if table is empty
+        $connection->query($insert_city_sql);
+        if ($connection->errorCode() != 00000) {
+            echo "Error initializing cities table: " . $connection->errorCode();
+            exit; // Exit script if city initialization fails
+        }
+    }
+}
+
+// Function to check if table is empty
+function isTableEmpty($connection, $tableName) {
+    $query = "SELECT COUNT(*) as count FROM $tableName";
+    $result = $connection->query($query);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        return $row['count'] == 0;
+    } else {
+        // Handle query error
+        return true; // Assuming table is considered empty if query fails
     }
 }
 
 // Create super admin user
 $super_admin_username = 'admin';
 $super_admin_email = 'admin123@gmail.com';
-$super_admin_password = 'admin123'; 
-$super_admin_role_id = 1; 
-$super_admin_city_id = 1; 
+$super_admin_password = 'admin123';
+$super_admin_role_id = 1;
+$super_admin_city_id = 1;
 
 $super_admin_hashed_password = password_hash($super_admin_password, PASSWORD_BCRYPT);
 
@@ -167,4 +186,3 @@ if ($connection->errorCode() != 00000) {
 } else {
     echo "Error creating super admin user: " . $connection->errorCode();
 }
-

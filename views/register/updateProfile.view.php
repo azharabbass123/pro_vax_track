@@ -46,12 +46,7 @@ require "views/partials/nav.php";
               name="province"
               aria-label="Default select example"
             >
-              <option selected="" disabled="">select province</option>
-              <?php 
-              foreach ($provinces as $province){
-                echo "<option id='".$province['id']."' value='".$province['id']. "'>" .$province['name']."</option>";
-              }
-              ?>
+              <option value="<?=$userData['province_id']?>" selected=""><?=$userData['province_name']?></option>
             </select>
           </div>
           <div class="mb-3">

@@ -2,10 +2,6 @@
 
 require 'model/getData.php';
 
-$healthWorkers = loadHealthWorkerWithCity();
-$patients = loadPatientWithCity();
-$appointments = loadAppoitments();
-$vaccinations = loadVaccinations();
 //print_r($vaccinations);
 // print_r($appointments);
 // showData($healthWorkers);

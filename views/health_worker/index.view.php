@@ -111,28 +111,37 @@ require 'views/partials/nav.php';
           <!-- track patients table  -->
           <div id="trackPatients_card" class="card mt-2">
             <div class="card-header">
-      <h3 class="display-6 fw-bold text-center text-primary">Track Patients by Province</h3>
+      <h3 class="display-6 fw-bold text-center text-primary">Patient Details</h3>
     </div>
     <div class="card-body">
       <table id="table" class="table table-bordered table-striped text-center">
         <thead>
         <tr>
           <th class="bg-primary text-white text-center">Sr.</th>
-          <th class="bg-primary text-white text-center">Privnce</th>
-          <th class="bg-primary text-white text-center">Number of Patients</th>
+          <th class="bg-primary text-white text-center">Name</th>
+          <th class="bg-primary text-white text-center">Email</th>
+          <th class="bg-primary text-white text-center">City</th>
+          <th class="bg-primary text-white text-center">Province</th>
+          <th class="bg-primary text-white text-center">Vax date</th>
+          <th class="bg-primary text-white text-center">Vax status</th>
         </tr>
         </thead>
-        <tbody id="trackPatients_data">
+        <tbody id="appointment_data">
         <?php 
               $sn = 1;
-              foreach ($getPatientsByProvince as $getPatientByProvince){
+              foreach ($trackPatientsByProvince as $trackPatientByProvince){
                 ?>
-                <tr>
-                <td class="text-center"> <?= $sn?></td>
-                <td class="text-center"><?= $getPatientByProvince['province_name'] ?></td>
-                <td class="text-center"><a href="patientDetail?province_id=<?= $getPatientByProvince['province_id'] ?>"><?= $getPatientByProvince['number_of_patients'] ?></a></td>
-              <?php
-               $sn++; }
+            <tr>
+            <td> <?= $sn?></td>
+            <td><?= $trackPatientByProvince['patient_name'] ?></td>
+            <td><?= $trackPatientByProvince['patient_email'] ?></td>
+            <td><?= $trackPatientByProvince['city_name'] ?></td>
+            <td><?= $trackPatientByProvince['province_name'] ?></td>
+            <td><?= $trackPatientByProvince['vaccination_date'] ?></td>
+            <td><?= $trackPatientByProvince['vaccination_status'] ?></td>
+            </tr>
+              <?php 
+              $sn++ ;}
               ?>
               
         </tbody>

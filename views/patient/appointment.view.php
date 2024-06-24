@@ -31,13 +31,6 @@ require 'views/partials/nav.php';
             <div class="col-md-4 form-group mt-3">
             <label for="hw">Health worker</label>
               <select name="health_worker" id="hw" class="form-select">
-                <option selected="" disabled="">Select Health Worker</option>
-                <?php 
-              $healthWorkers = loadHealthWorker();
-              foreach ($healthWorkers as $healthWorker){
-                echo "<option id='".$healthWorker['id']."' value='".$healthWorker['id']. "'>" .$healthWorker['name']."</option>";
-              }
-              ?>
               </select>
               <?php  if(isset($errors['health_worker'])) : ?>
                 <p class="text-danger text-xs"><?= $errors['health_worker'] ?></p>
