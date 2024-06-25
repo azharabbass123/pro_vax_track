@@ -10,8 +10,6 @@
           <th class="bg-primary text-white text-center">Patient Name</th>
           <th class="bg-primary text-white text-center">Date</th>
           <th class="bg-primary text-white text-center">Status</th>
-          <th class="bg-primary text-white text-center">Edit</th>
-          <th class="bg-primary text-white text-center">Delete</th>
         </tr>
         </thead>
         <tbody id="vaccination_data">

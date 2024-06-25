@@ -17,7 +17,7 @@ require 'views/partials/nav.php';
 <!-- appointments table  -->
 <div id="patient_details" class="card mt-2">
             <div class="card-header">
-      <h3 class="display-6 fw-bold text-center text-primary">Patient Details</h3>
+      <h3 class="display-6 fw-bold text-center text-primary">Blocked Users</h3>
     </div>
     <div class="card-body">
       <table id="table" class="table table-bordered table-striped text-center">
@@ -25,26 +25,20 @@ require 'views/partials/nav.php';
         <tr>
           <th class="bg-primary text-white text-center">Sr.</th>
           <th class="bg-primary text-white text-center">Name</th>
-          <th class="bg-primary text-white text-center">Email</th>
-          <th class="bg-primary text-white text-center">City</th>
-          <th class="bg-primary text-white text-center">Province</th>
-          <th class="bg-primary text-white text-center">Vax date</th>
-          <th class="bg-primary text-white text-center">Vax status</th>
+          <th class="bg-primary text-white text-center">Role</th>
+          <th class="bg-primary text-white text-center">Un Block</th>
         </tr>
         </thead>
         <tbody id="appointment_data">
         <?php 
               $sn = 1;
-              foreach ($trackPatientsByProvince as $trackPatientByProvince){
+              foreach ($blockedUsers as $blockedUser){
                 ?>
-            <tr>
+            <tr id="<?=$blockedUser['id']?>">
             <td> <?= $sn?></td>
-            <td><?= $trackPatientByProvince['patient_name'] ?></td>
-            <td><?= $trackPatientByProvince['patient_email'] ?></td>
-            <td><?= $trackPatientByProvince['city_name'] ?></td>
-            <td><?= $trackPatientByProvince['province_name'] ?></td>
-            <td><?= $trackPatientByProvince['vaccination_date'] ?></td>
-            <td><?= $trackPatientByProvince['vaccination_status'] ?></td>
+            <td><?= $blockedUser['name'] ?></td>
+            <td><?= ($blockedUser['role_id'] == 2) ? 'Health Worker' : 'Patient';?></td>
+            <td><a href="#" onclick="unblockUser(<?= $blockedUser['id'] ?>)" class="btn btn-sm btn-success">Un-Block</a></td>
             </tr>
               <?php 
               $sn++ ;}
@@ -52,6 +46,10 @@ require 'views/partials/nav.php';
               
         </tbody>
       </table>
+      <a
+          href="admin"
+          class="bg-info w-50 mt-5 mx-2 text-center text-white text-decoration-none p-2 rounded"
+          >Go Back</a>
     </div>
           </div>
         </div>

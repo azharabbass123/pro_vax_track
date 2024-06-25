@@ -226,3 +226,16 @@ function trackPatientsByProvince($province_id) {
         exit();
     }
 }
+
+function getDeletedUsers(){
+    $db = new Database();
+    try {
+    $users= $db->query(
+        'SELECT * FROM users WHERE deleted_at IS NOT NULL;'
+    )->fetchAll(PDO::FETCH_ASSOC);
+    return $users;
+    }
+    catch (PDOException $e){
+        echo "Databse Error" . $e->getMessage();
+    }
+}

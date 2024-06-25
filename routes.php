@@ -20,7 +20,7 @@ $router->get('vaccination', 'controllers/health_worker/vaccination.php')->only('
 $router->post('vaccination', 'controllers/health_worker/createVaccination.php')->only('health_worker');
 $router->get('editVaccination', 'controllers/health_worker/editVaccination.php');
 $router->patch('editVaccination', 'controllers/health_worker/updateVaccination.php');
-$router->get('patientDetail', 'controllers/patient/patientDetail.php')->only('health_worker');
+$router->get('patientDetail', 'controllers/patient/patientDetail.php')->only('admin');
 
 
 $router->get('patient','controllers/patient/index.php')->only('patient');

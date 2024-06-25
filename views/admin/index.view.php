@@ -15,6 +15,10 @@ require 'views/partials/nav.php';
       <button class="mySidebar-btn" onclick="patient_card()" id="patient">Pateints</button>
       <button class="mySidebar-btn" onclick="appointment_card()" id="appointment">Appointments</button>
       <button class="mySidebar-btn" onclick="vaccination_card()" id="vaccination">Vaccination</button>
+      <a
+          href="patientDetail"
+          class="bg-success w-50 mt-5 mx-5 text-center text-white text-decoration-none p-2 rounded"
+          >Un-Block Users</a>
     </div> 
 
     <!-- Page content -->
@@ -22,13 +26,13 @@ require 'views/partials/nav.php';
       <div class="row mt-2">
         <div class="col">
           <!-- Health worker table  -->
-          <?= require 'health_workers_table.php' ?>
+          <?php require 'health_workers_table.php' ?>
           <!-- patients table  -->
-          <?= require 'patients_table.php'?>
+          <?php require 'patients_table.php'?>
           <!-- appointments table  -->
-          <?= require 'vaccination_table.php' ?>
+          <?php require 'vaccination_table.php' ?>
           <!-- vaccination table  -->
-          <?= require 'appointment_table.php' ?>
+          <?php require 'appointment_table.php' ?>
         </div>
       </div>
     </div> 

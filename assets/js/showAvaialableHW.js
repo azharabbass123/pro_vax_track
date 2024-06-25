@@ -2,9 +2,9 @@ $(document).ready(function(){
     // Function to fetch cities based on selected province ID
     function fetchHW(date) {
         $.ajax({
-            url: 'model/getAvailableHW.php',
+            url: 'controllers/health_worker/availableHw.php',
             method: 'post',
-            data: { date: date }
+            data: { date: date}
         }).done(function(hws){
             hws = JSON.parse(hws);
             $('#hw').empty();
